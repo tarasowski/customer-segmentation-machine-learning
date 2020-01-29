@@ -109,13 +109,13 @@ def mixed_type_cameo(dfs):
     return (main_df, feat_df)
 
 def mixed_types_drop(dfs):
-    main_df, feat_df = dfs
-    return (main_df.drop(['LP_LEBENSPHASE_FEIN', 
+    main_df, _ = dfs
+    return main_df.drop(['LP_LEBENSPHASE_FEIN', 
             'LP_LEBENSPHASE_GROB', 
             'PLZ8_BAUMAX', 
             'PRAEGENDE_JUGENDJAHRE',
             'CAMEO_INTL_2015'
-            ], axis=1), feat_df)
+            ], axis=1)
 
 main = pipe([
         load_dfs,
@@ -129,6 +129,7 @@ main = pipe([
         mixed_type_movement,
         mixed_type_cameo,
         mixed_types_drop,
+        (lambda df: print(df.shape))
         ])
 
 
