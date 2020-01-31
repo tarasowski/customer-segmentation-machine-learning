@@ -46,7 +46,6 @@ elif ENV == 'TRAIN':
 elif ENV == 'PREDICT':
     try:
         labels = predict_step()
-        print('from predict steps')
     except Exception as e:
         print(e)
     else:
