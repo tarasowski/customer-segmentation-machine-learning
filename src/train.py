@@ -35,6 +35,6 @@ main = lambda n_comp, n_clusters: pipe([
 
 if __name__ == '__main__':
   df = data_load('../models/df.pkl')
-  model, X_pca = main(119, 19)(df)
+  model, X_pca = main(116, 19)(df)
   save_status(model, '../models/model.pkl')
   save_status(X_pca, '../models/X_pca.pkl')

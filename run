@@ -22,7 +22,7 @@ fi
 if [[ "$1" == "train" ]]
 then 
     echo "Running: $1"
-    ENV=TRAIN python3 ./src/main.py $TRAIN_DATA_PATH $TRAIN_SAVE_PATH $TRAIN_SAVE_PCA 
+    ENV=TRAIN python3 ./src/main.py $TRAIN_DATA_PATH $TRAIN_SAVE_PATH $TRAIN_SAVE_PCA --pca_components 116 --n_clusters 19
 fi
 
 if [[ "$1" == "predict" ]]
