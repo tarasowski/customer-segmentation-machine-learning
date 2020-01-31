@@ -2,18 +2,18 @@ import numpy as np
 import pandas as pd
 import json
 from functools import reduce
+import joblib
 
 pipe = lambda fns: lambda x: reduce(lambda v, f: f(v), fns, x)
 
-def load_dfs(args):
-    dir_main, dir_feat, nrows = args
-    return (pd.read_csv(dir_main, delimiter=';', nrows=nrows),
-            pd.read_csv(dir_feat, delimiter=';'))
 
 def missing_to_list(dfs):
     main_df, feat_df = dfs
-    feat_df_xs = feat_df['missing_or_unknown'].apply(lambda x: x[1:-1].split(','))
-    feat_df_enc = feat_df_xs.apply(lambda x: list(map(lambda y: y if y == 'XX' or y == 'X' or y == '' else int(y), x)))
+    feat_df_xs = feat_df['missing_or_unknown'].apply(
+            lambda x: x[1:-1].split(','))
+    feat_df_enc = feat_df_xs.apply(
+            lambda x: list(map(
+                    lambda y: y if y == 'XX' or y == 'X' or y == '' else int(y), x)))
     feat_df['missing_or_unknown'] = feat_df_enc
     return (main_df, feat_df)
 
@@ -128,17 +128,19 @@ main = pipe([
         mixed_type_movement,
         mixed_type_cameo,
         mixed_types_drop,
-        (lambda df: print(df.shape))
         ])
 
 
+def load_dfs(dir_main, dir_feat, nrows):
+    return (pd.read_csv(dir_main, delimiter=';', nrows=nrows),
+            pd.read_csv(dir_feat, delimiter=';'))
+
 if __name__ == '__main__':
     try:
-        dfs = load_dfs(('../inputs/Udacity_AZDIAS_Subset.csv', 
+        dfs = load_dfs('../inputs/Udacity_AZDIAS_Subset.csv', 
             '../inputs/AZDIAS_Feature_Summary.csv', 
-            1000))
+            1000)
+        main(dfs)
     except Exception as e:
         print(e)
 
-    else:
-        main(dfs)

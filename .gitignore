@@ -1,3 +1,4 @@
 *.csv
 *.pth
+*.pkl
 Data_Dictionary.md
