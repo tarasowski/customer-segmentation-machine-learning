@@ -118,7 +118,6 @@ def mixed_types_drop(dfs):
             ], axis=1)
 
 main = pipe([
-        load_dfs,
         missing_to_list,
         attribute_as_index,
         convert_missing_nans,
@@ -134,5 +133,12 @@ main = pipe([
 
 
 if __name__ == '__main__':
-    main(('../inputs/Udacity_AZDIAS_Subset.csv', '../inputs/AZDIAS_Feature_Summary.csv', 1000))
+    try:
+        dfs = load_dfs(('../inputs/Udacity_AZDIAS_Subset.csv', 
+            '../inputs/AZDIAS_Feature_Summary.csv', 
+            1000))
+    except Exception as e:
+        print(e)
 
+    else:
+        main(dfs)
