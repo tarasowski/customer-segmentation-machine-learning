@@ -26,10 +26,10 @@ The first step is to preprocess the data, run the following command.
 
 The next step is to train the model, run the following commands. 
 
+* Basic usage: `./run train` 
 * Options:
-  * Choose number of PCA components: `./run train $2`
-  * Choose number of clusters: `./run train $3`
-* Example: `./run train 116 19` (116 PCA components and 19 clusters)
+  * Choose number of PCA components: `--pca_components n`
+  * Choose number of clusters: `--n_clusters n`
 
 The last step is to make predictions based on the trained model, run the following
 command:
